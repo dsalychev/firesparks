@@ -6,7 +6,9 @@ to `.gvimrc`:
 	syntax on
 	colorscheme firesparks-256
 or `.vimrc`:
+
 	let g:colors_name="firesparks-256"
+
 in order to activate a colorscheme.
     
 ## MacVim on macOS:
