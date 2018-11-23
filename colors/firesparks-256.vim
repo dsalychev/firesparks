@@ -3,6 +3,7 @@
 "	Idea: http://timetobleed.com/a-closer-look-at-a-recent-privilege-escalation-bug-in-linux-cve-2013-2094/
 "	BasedOn: bubblegum-256-dark.vim <github.com/baskerville/bubblegum>
 "	Created: 02.2018
+"	Version: 0.0.6
 
 hi clear
 if exists("syntax_on")
@@ -13,7 +14,7 @@ let g:colors_name="firesparks-256"
 
 " Main
 hi Normal ctermfg=15 ctermbg=233 cterm=none guifg=#F8F8F8 guibg=#141414 gui=none
-hi Comment ctermfg=173 ctermbg=233 cterm=none guifg=#E9885C guibg=#141414 gui=none
+hi Comment ctermfg=239 ctermbg=233 cterm=none guifg=#4E4E4E guibg=#141414 gui=none
 
 " Constant
 hi Constant ctermfg=186 ctermbg=233 cterm=none guifg=#D7D787 guibg=#141414 gui=none
