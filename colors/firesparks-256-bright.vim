@@ -13,7 +13,7 @@ let g:colors_name="firesparks-256-bright"
 
 " Main
 hi Normal ctermfg=15 ctermbg=236 cterm=none guifg=#F8F8F8 guibg=#303030 gui=none
-hi Comment ctermfg=239 ctermbg=236 cterm=none guifg=#4E4E4E guibg=#303030 gui=none
+hi Comment ctermfg=66 ctermbg=236 cterm=none guifg=#408080 guibg=#303030 gui=none
 
 " Constant
 hi Constant ctermfg=186 ctermbg=236 cterm=none guifg=#D7D787 guibg=#303030 gui=none
