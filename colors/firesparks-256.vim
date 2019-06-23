@@ -1,159 +1,234 @@
-"	ThemeName: firesparks-256.vim <github.com/dsalychev/firesparks>
-"	Author: dsl <darkness.bsd@gmail.com>
-"	Idea: http://timetobleed.com/a-closer-look-at-a-recent-privilege-escalation-bug-in-linux-cve-2013-2094/
-"	BasedOn: bubblegum-256-dark.vim <github.com/baskerville/bubblegum>
-"	Created: 02.2018
-"	Version: 0.0.6
+" =======================================================================
+"
+"    ThemeName:    firesparks-256.vim <github.com/dsalychev/firesparks>
+"    Author:       dsl <darkness.bsd@gmail.com>
+"    Idea:         http://timetobleed.com/a-closer-look-at-a-recent-privilege-escalation-bug-in-linux-cve-2013-2094/
+"    BasedOn:      bubblegum-256-dark.vim <github.com/baskerville/bubblegum>
+"    Created:      02.2018
+"    Version:      0.0.10
+"
+" =======================================================================
 
-hi clear
+highlight clear
 if exists("syntax_on")
     syntax reset
 endif
 
 let g:colors_name="firesparks-256"
 
+let s:black			= { "gui": "#080808", "cterm": "232" }
+let s:black_light		= { "gui": "#141414", "cterm": "233" }
+let s:gray_darkest		= { "gui": "#3a3a3a", "cterm": "237" }
+let s:gray_darker		= { "gui": "#444444", "cterm": "238" }
+let s:gray_dark			= { "gui": "#5f5f5f", "cterm": "59" }
+let s:gray			= { "gui": "#808080", "cterm": "244" }
+let s:gray_light		= { "gui": "#949494", "cterm": "246" }
+let s:gray_lighter		= { "gui": "#9e9e9e", "cterm": "247" }
+let s:gray_lightest		= { "gui": "#b2b2b2", "cterm": "249" }
+let s:gray_white		= { "gui": "#d0d0d0", "cterm": "252" }
+let s:gray_white_light		= { "gui": "#dadada", "cterm": "253" }
+let s:white			= { "gui": "#f8f8f8", "cterm": "15" }
+let s:green			= { "gui": "#5fd75f", "cterm": "77" }
+let s:green_dirty_dark		= { "gui": "#8f9d6a", "cterm": "107" }
+let s:green_dirty		= { "gui": "#87af5f", "cterm": "107" }
+let s:green_dirty_light		= { "gui": "#afd75f", "cterm": "149" }
+let s:green_blue		= { "gui": "#5faf87", "cterm": "72" }
+let s:blue_dirty		= { "gui": "#87afaf", "cterm": "109" }
+let s:yellow			= { "gui": "#d7d700", "cterm": "184" }
+let s:blue_dark			= { "gui": "#5fafd7", "cterm": "74" }
+let s:blue			= { "gui": "#00afd7", "cterm": "38" }
+let s:blue_lighter		= { "gui": "#87d7ff", "cterm": "117" }
+let s:blue_green		= { "gui": "#5fd7af", "cterm": "79" }
+let s:blue_green_light		= { "gui": "#5fd7d7", "cterm": "80" }
+let s:blue_green_lighter	= { "gui": "#87d7d7", "cterm": "116" }
+let s:purple			= { "gui": "#875fd7", "cterm": "98" }
+let s:purple_light		= { "gui": "#8787d7", "cterm": "104" }
+let s:purple_lighter		= { "gui": "#afafff", "cterm": "147" }
+let s:purple_pink		= { "gui": "#af87d7", "cterm": "140" }
+let s:orange_dark		= { "gui": "#eaaf5c", "cterm": "179" }
+let s:orange			= { "gui": "#ffaf5f", "cterm": "215" }
+let s:orange_light		= { "gui": "#ffd787", "cterm": "222" }
+let s:orange_dirty_dark		= { "gui": "#cda869", "cterm": "179" }
+let s:orange_dirty		= { "gui": "#d7af5f", "cterm": "179" }
+let s:orange_dirty_light	= { "gui": "#e0ca64", "cterm": "185" }
+let s:orange_dirty_lighter	= { "gui": "#d7d787", "cterm": "186" }
+let s:redbrick			= { "gui": "#cf6a4c", "cterm": "167" }
+let s:red			= { "gui": "#d75f5f", "cterm": "167" }
+let s:peach			= { "gui": "#ff8787", "cterm": "210" }
+let s:peach_light		= { "gui": "#ffafaf", "cterm": "217" }
+let s:pink_dirty		= { "gui": "#d78787", "cterm": "174" }
+let s:pink_dirty_light		= { "gui": "#d7afaf", "cterm": "181" }
+let s:pink_dark			= { "gui": "#d75f87", "cterm": "168" }
+let s:pink			= { "gui": "#d787af", "cterm": "175" }
+let s:pink_light		= { "gui": "#ff87af", "cterm": "211" }
+
+let s:fg		= s:white
+let s:bg		= s:black_light
+
+let s:comment_fg	= { "gui": "#4e4e4e", "cterm": "239" }
+
+
+function! s:h(group, fg, bg, attr)
+  if type(a:fg) == type({})
+    exec "hi " . a:group . " guifg=" . a:fg.gui . " ctermfg=" . a:fg.cterm
+  else
+    exec "hi " . a:group . " guifg=NONE cterm=NONE"
+  endif
+  if type(a:bg) == type({})
+    exec "hi " . a:group . " guibg=" . a:bg.gui . " ctermbg=" . a:bg.cterm
+  else
+    exec "hi " . a:group . " guibg=NONE ctermbg=NONE"
+  endif
+  if a:attr != ""
+    exec "hi " . a:group . " gui=" . a:attr . " cterm=" . a:attr
+  else
+    exec "hi " . a:group . " gui=NONE cterm=NONE"
+  endif
+endfun
+
+
 " Main
-hi Normal ctermfg=15 ctermbg=233 cterm=none guifg=#F8F8F8 guibg=#141414 gui=none
-hi Comment ctermfg=239 ctermbg=233 cterm=none guifg=#4E4E4E guibg=#141414 gui=none
+call s:h("Normal", s:fg, s:bg, "")
+call s:h("Comment", s:comment_fg, s:bg, "")
 
 " Constant
-hi Constant ctermfg=186 ctermbg=233 cterm=none guifg=#D7D787 guibg=#141414 gui=none
-hi String ctermfg=107 ctermbg=233 cterm=none guifg=#8F9D6A guibg=#141414 gui=none
-hi Character ctermfg=107 ctermbg=233 cterm=none guifg=#8F9D6A guibg=#141414 gui=none
-hi Number ctermfg=167 ctermbg=233 cterm=none guifg=#CF6A4C guibg=#141414 gui=none
-hi Boolean ctermfg=107 ctermbg=233 cterm=none guifg=#8F9D6A guibg=#141414 gui=none
-hi Float ctermfg=167 ctermbg=233 cterm=none guifg=#CF6A4C guibg=#141414 gui=none
+call s:h("Constant", s:orange_dirty_lighter, s:bg, "")
+call s:h("String", s:green_dirty_dark, s:bg, "")
+call s:h("Character", s:green_dirty_dark, s:bg, "")
+call s:h("Number", s:redbrick, s:bg, "")
+call s:h("Boolean", s:green_dirty_dark, s:bg, "")
+call s:h("Float", s:redbrick, s:bg, "")
 
 " Variable Name
-hi Identifier ctermfg=179 ctermbg=233 cterm=none guifg=#EAAF5C guibg=#141414 gui=none
-hi Function ctermfg=179 ctermbg=233 cterm=none guifg=#EAAF5C guibg=#141414 gui=none
+call s:h("Identifier", s:orange_dark, s:bg, "")
+call s:h("Function", s:orange_dark, s:bg, "")
 
 " Statement
-hi Statement ctermfg=179 ctermbg=233 cterm=none guifg=#CDA869 guibg=#141414 gui=none
-hi Conditional ctermfg=179 ctermbg=233 cterm=none guifg=#CDA869 guibg=#141414 gui=none
-hi Repeat ctermfg=179 ctermbg=233 cterm=none guifg=#CDA869 guibg=#141414 gui=none
-hi Label ctermfg=179 ctermbg=233 cterm=none guifg=#CDA869 guibg=#141414 gui=none
-hi Operator ctermfg=179 ctermbg=233 cterm=none guifg=#CDA869 guibg=#141414 gui=none
-hi Keyword ctermfg=179 ctermbg=233 cterm=none guifg=#CDA869 guibg=#141414 gui=none
-hi Exception ctermfg=179 ctermbg=233 cterm=none guifg=#CDA869 guibg=#141414 gui=none
+call s:h("Statement", s:orange_dirty_dark, s:bg, "")
+call s:h("Conditional", s:orange_dirty_dark, s:bg, "")
+call s:h("Repeat", s:orange_dirty_dark, s:bg, "")
+call s:h("Label", s:orange_dirty_dark, s:bg, "")
+call s:h("Operator", s:orange_dirty_dark, s:bg, "")
+call s:h("Keyword", s:orange_dirty_dark, s:bg, "")
+call s:h("Exception", s:orange_dirty_dark, s:bg, "")
 
 " Preprocessor
-hi PreProc ctermfg=185 ctermbg=233 cterm=none guifg=#E0CA64 guibg=#141414 gui=none
-hi Include ctermfg=185 ctermbg=233 cterm=none guifg=#E0CA64 guibg=#141414 gui=none
-hi Define ctermfg=185 ctermbg=233 cterm=none guifg=#E0CA64 guibg=#141414 gui=none
-hi Macro ctermfg=185 ctermbg=233 cterm=none guifg=#E0CA64 guibg=#141414 gui=none
-hi PreCondit ctermfg=185 ctermbg=233 cterm=none guifg=#E0CA64 guibg=#141414 gui=none
+call s:h("PreProc", s:orange_dirty_light, s:bg, "")
+call s:h("Include", s:orange_dirty_light, s:bg, "")
+call s:h("Define", s:orange_dirty_light, s:bg, "")
+call s:h("Macro", s:orange_dirty_light, s:bg, "")
+call s:h("PreCondit", s:orange_dirty_light, s:bg, "")
 
 " Type
-hi Type ctermfg=179 ctermbg=233 cterm=none guifg=#CDA869 guibg=#141414 gui=none
-hi StorageClass ctermfg=179 ctermbg=233 cterm=none guifg=#CDA869 guibg=#141414 gui=none
-hi Structure ctermfg=179 ctermbg=233 cterm=none guifg=#CDA869 guibg=#141414 gui=none
-hi Typedef ctermfg=179 ctermbg=233 cterm=none guifg=#CDA869 guibg=#141414 gui=none
+call s:h("Type", s:orange_dirty_dark, s:bg, "")
+call s:h("StorageClass", s:orange_dirty_dark, s:bg, "")
+call s:h("Structure", s:orange_dirty_dark, s:bg, "")
+call s:h("Typedef", s:orange_dirty_dark, s:bg, "")
 
 " Special
-hi Special ctermfg=174 ctermbg=233 cterm=none guifg=#D78787 guibg=#141414 gui=none
-hi SpecialChar ctermfg=174 ctermbg=233 cterm=none guifg=#D78787 guibg=#141414 gui=none
-hi Tag ctermfg=174 ctermbg=233 cterm=none guifg=#D78787 guibg=#141414 gui=none
-hi Delimiter ctermfg=174 ctermbg=233 cterm=none guifg=#D78787 guibg=#141414 gui=none
-hi SpecialComment ctermfg=174 ctermbg=233 cterm=none guifg=#D78787 guibg=#141414 gui=none
-hi Debug ctermfg=174 ctermbg=233 cterm=none guifg=#D78787 guibg=#141414 gui=none
-hi Underlined ctermfg=249 ctermbg=233 cterm=underline guifg=#B2B2B2 guibg=#141414 gui=underline
-hi Ignore ctermfg=233 ctermbg=233 cterm=none guifg=#141414 guibg=#141414 gui=none
-hi Error ctermfg=15 ctermbg=167 cterm=none guifg=#FFFFFF guibg=#D75F5F gui=none
-hi Todo ctermfg=244 ctermbg=233 cterm=none guifg=#808080 guibg=#141414 gui=none
+call s:h("Special", s:pink_dirty, s:bg, "")
+call s:h("SpecialChar", s:pink_dirty, s:bg, "")
+call s:h("Tag", s:pink_dirty, s:bg, "")
+call s:h("Delimiter", s:pink_dirty, s:bg, "")
+call s:h("SpecialComment", s:pink_dirty, s:bg, "")
+call s:h("Debug", s:pink_dirty, s:bg, "")
+call s:h("Underlined", s:gray_lightest, s:bg, "underline")
+call s:h("Ignore", s:bg, s:bg, "")
+call s:h("Error", s:fg, s:red, "")
+call s:h("Todo", s:gray, s:bg, "")
 
 " Window
-hi StatusLine ctermfg=249 ctermbg=237 cterm=none guifg=#B2B2B2 guibg=#3A3A3A gui=none
-hi StatusLineNC ctermfg=244 ctermbg=237 cterm=none guifg=#808080 guibg=#3A3A3A gui=none
-hi TabLine ctermfg=249 ctermbg=237 cterm=none guifg=#B2B2B2 guibg=#3A3A3A gui=none
-hi TabLineSel ctermfg=253 ctermbg=238 cterm=none guifg=#DADADA guibg=#444444 gui=none
-hi TabLineFill ctermbg=237 cterm=none guibg=#3A3A3A gui=none
-hi VertSplit ctermfg=237 ctermbg=237 cterm=none guifg=#3A3A3A guibg=#3A3A3A gui=none
+call s:h("StatusLine", s:gray_lightest, s:gray_darkest, "")
+call s:h("StatusLineNC", s:gray, s:gray_darkest, "")
+call s:h("TabLine", s:gray_lightest, s:gray_darkest, "")
+call s:h("TabLineSel", s:gray_white_light, s:gray_darker, "")
+call s:h("TabLineFill", "", s:gray_darkest, "")
+call s:h("VertSplit", s:gray_darkest, s:gray_darkest, "")
 
 " Menu
-hi Pmenu ctermfg=249 ctermbg=237 cterm=none guifg=#B2B2B2 guibg=#3A3A3A gui=none
-hi PmenuSel ctermfg=15 ctermbg=244 cterm=none guifg=#FFFFFF guibg=#808080 gui=none
-hi PmenuSbar ctermbg=59 cterm=none guibg=#5F5F5F gui=none
-hi PmenuThumb ctermbg=246 cterm=none guibg=#949494 gui=none
-hi WildMenu ctermfg=232 ctermbg=98 cterm=none guifg=#080808 guibg=#875FD7 gui=none
+call s:h("Pmenu", s:gray_lightest, s:gray_darkest, "")
+call s:h("PmenuSel", s:fg, s:gray, "")
+call s:h("PmenuSbar", "", s:gray_dark, "")
+call s:h("PmenuThumb", "", s:gray_light, "")
+call s:h("WildMenu", s:black, s:purple, "")
 
 " Selection
-hi Visual ctermfg=233 ctermbg=117 cterm=none guifg=#141414 guibg=#87D7FF gui=none
-hi VisualNOS ctermfg=233 ctermbg=80 cterm=none guifg=#141414 guibg=#5FD7D7 gui=none
+call s:h("Visual", s:bg, s:blue_lighter, "")
+call s:h("VisualNOS", s:bg, s:blue_green_light, "")
 
 " Message
-hi ErrorMsg ctermfg=210 ctermbg=233 cterm=none guifg=#FF8787 guibg=#141414 gui=none
-hi WarningMsg ctermfg=140 ctermbg=233 cterm=none guifg=#AF87D7 guibg=#141414 gui=none
-hi MoreMsg ctermfg=72 ctermbg=233 cterm=none guifg=#5FAF87 guibg=#141414 gui=none
-hi ModeMsg ctermfg=222 ctermbg=233 cterm=bold guifg=#FFD787 guibg=#141414 gui=bold
-hi Question ctermfg=38 ctermbg=233 cterm=none guifg=#00AFD7 guibg=#141414 gui=none
+call s:h("ErrorMsg", s:peach, s:bg, "")
+call s:h("WarningMsg", s:purple_pink, s:bg, "")
+call s:h("MoreMsg", s:green_blue, s:bg, "")
+call s:h("ModeMsg", s:orange_light, s:bg, "bold")
+call s:h("Question", s:blue, s:bg, "")
 
 " Mark
-hi Folded ctermfg=244 ctermbg=233 cterm=none guifg=#808080 guibg=#141414 gui=none
-hi FoldColumn ctermfg=79 ctermbg=237 cterm=none guifg=#5FD7AF guibg=#3A3A3A gui=none
-hi SignColumn ctermfg=184 ctermbg=237 cterm=none guifg=#D7D700 guibg=#3A3A3A gui=none
-hi ColorColumn ctermbg=237 cterm=none guibg=#3A3A3A gui=none
-hi LineNr ctermfg=244 ctermbg=237 cterm=none guifg=#808080 guibg=#3A3A3A gui=none
-hi MatchParen ctermfg=0 ctermbg=215 cterm=none guifg=#000000 guibg=#FFAF5F gui=none
+call s:h("Folded", s:gray, s:bg, "")
+call s:h("FoldColumn", s:yellow, s:gray_darkest, "")
+call s:h("SignColumn", s:yellow, s:gray_darkest, "")
+call s:h("ColorColumn", "", s:gray_darkest, "")
+call s:h("LineNr", s:gray, s:gray_darkest, "")
+call s:h("MatchParen", s:black, s:orange, "")
 
 " Cursor
-hi CursorColumn ctermbg=237 cterm=none guibg=#3A3A3A gui=none
-hi CursorLine ctermbg=237 cterm=none guibg=#3A3A3A gui=none
-hi CursorLineNr ctermfg=249 ctermbg=237 cterm=none guifg=#B2B2B2 guibg=#3A3A3A gui=none
+call s:h("CursorColumn", "", s:gray_darkest, "")
+call s:h("CursorLine", "", s:gray_darkest, "")
+call s:h("CursorLineNr", s:gray_lightest, s:gray_darkest, "")
 
 " Search
-hi Search ctermfg=0 ctermbg=179 cterm=none guifg=#000000 guibg=#D7AF5F gui=none
-hi IncSearch ctermfg=15 ctermbg=168 cterm=none guifg=#FFFFFF guibg=#D75F87 gui=none
+call s:h("Search", s:black, s:orange_dirty, "")
+call s:h("IncSearch", s:fg, s:pink_dark, "")
 
 " Diff Mode
-hi DiffAdd ctermfg=0 ctermbg=149 cterm=none guifg=#000000 guibg=#AFD75F gui=none
-hi DiffChange ctermfg=0 ctermbg=217 cterm=none guifg=#000000 guibg=#FFAFAF gui=none
-hi DiffText ctermfg=0 ctermbg=211 cterm=bold guifg=#000000 guibg=#FF87AF gui=bold
-hi DiffDelete ctermfg=0 ctermbg=249 cterm=none guifg=#000000 guibg=#B2B2B2 gui=none
+call s:h("DiffAdd", s:black, s:green_dirty_light, "")
+call s:h("DiffChange", s:black, s:peach_light, "")
+call s:h("DiffText", s:black, s:pink_light, "bold")
+call s:h("DiffDelete", s:black, s:gray_lightest, "")
 
 " Spell
-hi SpellBad ctermfg=210 ctermbg=233 cterm=underline guifg=#FF8787 guibg=#141414 gui=underline
-hi SpellCap ctermfg=174 ctermbg=233 cterm=underline guifg=#D78787 guibg=#141414 gui=underline
-hi SpellRare ctermfg=181 ctermbg=233 cterm=underline guifg=#D7AFAF guibg=#141414 gui=underline
-hi SpellLocal ctermfg=167 ctermbg=233 cterm=underline guifg=#CF6A4C guibg=#141414 gui=underline
+call s:h("SpellBad", s:peach, s:bg, "underline")
+call s:h("SpellCap", s:pink_dirty, s:bg, "underline")
+call s:h("SpellRare", s:pink_dirty_light, s:bg, "underline")
+call s:h("SpellLocal", s:redbrick, s:bg, "underline")
 
 " Misc
-hi SpecialKey ctermfg=237 ctermbg=233 cterm=none guifg=#3A3A3A guibg=#141414 gui=none
-hi NonText ctermfg=237 ctermbg=233 cterm=none guifg=#3A3A3A guibg=#141414 gui=none
-hi Directory ctermfg=179 ctermbg=233 cterm=none guifg=#CDA869 guibg=#141414 gui=none
-hi Title ctermfg=109 cterm=none guifg=#87AFAF gui=none
-hi Conceal ctermfg=77 ctermbg=233 cterm=none guifg=#5FD75F guibg=#141414 gui=none
-hi Noise ctermfg=247 ctermbg=233 cterm=none guifg=#9E9E9E guibg=#141414 gui=none
-hi helpHyperTextJump ctermfg=74 ctermbg=233 cterm=none guifg=#5FAFD7 guibg=#141414 gui=none
-hi perlSharpBang ctermfg=244 ctermbg=233 cterm=none guifg=#808080 guibg=#141414 gui=none
-hi rubySharpBang ctermfg=244 ctermbg=233 cterm=none guifg=#808080 guibg=#141414 gui=none
-hi jsFuncCall ctermfg=116 ctermbg=233 cterm=none guifg=#87D7D7 guibg=#141414 gui=none
+call s:h("SpecialKey", s:gray_darkest, s:bg, "")
+call s:h("NonText", s:gray_darkest, s:bg, "")
+call s:h("Directory", s:orange_dirty_dark, s:bg, "")
+call s:h("Title", s:blue_dirty, "", "")
+call s:h("Conceal", s:green, s:bg, "")
+call s:h("Noise", s:gray_lighter, s:bg, "")
+call s:h("helpHyperTextJump", s:blue_dark, s:bg, "")
+call s:h("perlSharpBang", s:gray, s:bg, "")
+call s:h("rubySharpBang", s:gray, s:bg, "")
+call s:h("jsFuncCall", s:blue_green_lighter, s:bg, "")
 
 " Html
-hi javaScriptNumber ctermfg=179 ctermbg=233 cterm=none guifg=#D7AF5F guibg=#141414 gui=none
-hi htmlTag ctermfg=147 ctermbg=233 cterm=none guifg=#AFAFFF guibg=#141414 gui=none
-hi htmlEndTag ctermfg=147 ctermbg=233 cterm=none guifg=#AFAFFF guibg=#141414 gui=none
-hi htmlTagName ctermfg=175 ctermbg=233 cterm=none guifg=#D787AF guibg=#141414 gui=none
-hi htmlString ctermfg=107 ctermbg=233 cterm=none guifg=#8F9D6A guibg=#141414 gui=none
+call s:h("javaScriptNumber", s:orange_dirty, s:bg, "")
+call s:h("htmlTag", s:purple_lighter, s:bg, "")
+call s:h("htmlEndTag", s:purple_lighter, s:bg, "")
+call s:h("htmlTagName", s:pink, s:bg, "")
+call s:h("htmlString", s:green_dirty_dark, s:bg, "")
 
 " Vim
-hi vimFold ctermfg=244 ctermbg=233 cterm=none guifg=#808080 guibg=#141414 gui=none
-hi vimCommentTitle ctermfg=249 ctermbg=233 cterm=none guifg=#B2B2B2 guibg=#141414 gui=none
+call s:h("vimFold", s:gray, s:bg, "")
+call s:h("vimCommentTitle", s:gray_lightest, s:bg, "")
 
 " Diff File
-hi diffFile ctermfg=244 ctermbg=233 cterm=none guifg=#808080 guibg=#141414 gui=none
-hi diffLine ctermfg=186 ctermbg=233 cterm=none guifg=#D7D787 guibg=#141414 gui=none
-hi diffAdded ctermfg=107 ctermbg=233 cterm=none guifg=#87AF5F guibg=#141414 gui=none
-hi diffRemoved ctermfg=175 ctermbg=233 cterm=none guifg=#D787AF guibg=#141414 gui=none
-hi diffChanged ctermfg=179 ctermbg=233 cterm=none guifg=#D7AF5F guibg=#141414 gui=none
-hi diffSubname ctermfg=252 ctermbg=233 cterm=none guifg=#D0D0D0 guibg=#141414 gui=none
-hi diffOldLine ctermfg=104 ctermbg=233 cterm=none guifg=#8787D7 guibg=#141414 gui=none
+call s:h("diffFile", s:gray, s:bg, "")
+call s:h("diffLine", s:orange_dirty_lighter, s:bg, "")
+call s:h("diffAdded", s:green_dirty, s:bg, "")
+call s:h("diffRemoved", s:pink, s:bg, "")
+call s:h("diffChanged", s:orange_dirty, s:bg, "")
+call s:h("diffSubname", s:gray_white, s:bg, "")
+call s:h("diffOldLine", s:purple_light, s:bg, "")
 
 " Mail
-hi mailSubject ctermfg=109 ctermbg=233 cterm=none guifg=#87AFAF guibg=#141414 gui=none
-hi mailSignature ctermfg=244 ctermbg=233 cterm=none guifg=#808080 guibg=#141414 gui=none
+call s:h("mailSubject", s:blue_dirty, s:bg, "")
+call s:h("mailSignature", s:gray, s:bg, "")
 
 " Markdown
-hi markdownCode ctermfg=244 ctermbg=233 cterm=none guifg=#808080 guibg=#141414 gui=none
-hi markdownCodeBlock ctermfg=244 ctermbg=233 cterm=none guifg=#808080 guibg=#141414 gui=none
-hi markdownItalic ctermfg=252 ctermbg=233 cterm=none guifg=#D0D0D0 guibg=#141414 gui=none
+call s:h("markdownCode", s:gray, s:bg, "")
+call s:h("markdownCodeBlock", s:gray, s:bg, "")
+call s:h("markdownItalic", s:gray_white, s:bg, "")
